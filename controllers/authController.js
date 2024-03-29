@@ -66,3 +66,53 @@ exports.loginUser = async (req, res) => {
         res.status(500).send('Server error');
     }
 }
+
+exports.forgotPassword = async(req,res)=>{
+    try{
+        const {email} = req.body;
+        const user = await User.findOne({email});
+
+        if(!user){
+            return res.status(404).json({msg:'User not found'})
+        }
+
+        const resetToken = generateResetToken();
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires = Date.now() + 3600000;
+        await user.save();
+        
+        sendResetPasswordEmail(user.email, resetToken);
+
+        res.status(200).json({msg:'Password reset instructions send to your email'})
+    }
+    catch(err){
+        console.error(err.message);
+        res.status(500).send('Server Error')
+    }
+}
+
+exports.resetPassword = async (req,res) =>{
+    try{
+        const {token} = req.params;
+        const {password} = req.body;
+
+        const user = await User.findOne({resetPasswordToken:token, resetPasswordExpires: {$gt: Date.now()}})
+    
+        if(!user){
+            return res.status(400).json({msg:'Invalid or expired token'})
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({msg: 'Password Reset Successfully'})
+    }
+    catch(err){
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
