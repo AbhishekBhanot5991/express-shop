@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-
+const nodemailer = require('nodemailer')
 exports.generateResetToken = () =>{
     return crypto.randomBytes(20).toString('hex');
 }
