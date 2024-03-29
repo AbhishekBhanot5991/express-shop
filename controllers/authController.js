@@ -2,6 +2,7 @@ const User =  require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const { generateResetToken, sendResetPasswordEmail } = require('../utils/resetUtils');
 
 exports.registerUser = async (req,res)=>{
     try{
