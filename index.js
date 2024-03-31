@@ -33,7 +33,9 @@ app.use('/api/product', productRoutes); // Mount authRoutes at /api/product
 app.use('/api/order', orderRoutes); // Mount order routes
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/cart', cartRoutes);
-
+app.get('/',(req,res)=>{
+    res.send("Hello");
+})
 app.listen(port, ()=>{
     console.log(`Server is running on the PORT : http://localhost:${port}`)
 })
