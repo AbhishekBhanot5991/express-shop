@@ -36,7 +36,10 @@ app.use('/api/cart', cartRoutes);
 app.get('/',(req,res)=>{
     res.send("Hello");
 })
-app.listen(port, ()=>{
-    console.log(`Server is running on the PORT : http://localhost:${port}`)
-})
+// app.listen(port, ()=>{
+//     console.log(`Server is running on the PORT : http://localhost:${port}`)
+// })
 
+module.exports = (req,res)=>{
+    res.status(200).json({message:"Hello World"})
+}
