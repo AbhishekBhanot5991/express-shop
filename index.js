@@ -40,6 +40,7 @@ app.get('/',(req,res)=>{
 //     console.log(`Server is running on the PORT : http://localhost:${port}`)
 // })
 
-module.exports = (req,res)=>{
-    res.status(200).json({message:"Hello World"})
-}
+// module.exports = (req,res)=>{
+//     res.status(200).json({message:"Hello World"})
+// }
+module.exports = app;
