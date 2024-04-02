@@ -18,7 +18,7 @@ const cartRoutes = require('./routes/cartRoutes');
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send("Hello");
+    res.send('products api running new deploy');
 });
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
