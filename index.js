@@ -20,6 +20,9 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan());
 
+app.get('/',(req,res)=>{
+    res.send("Hello");
+})
 const port = process.env.PORT || 3000;
 dotenv.config()
 mongoose.connect(process.env.DB_CONNECTION_STRING).then(()=>{
@@ -33,15 +36,6 @@ app.use('/api/product', productRoutes); // Mount authRoutes at /api/product
 app.use('/api/order', orderRoutes); // Mount order routes
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/cart', cartRoutes);
-app.get('/',(req,res)=>{
-    res.send("Hello");
-})
 app.listen(port, ()=>{
     console.log(`Server is running on the PORT : http://localhost:${port}`)
 })
-
-module.exports = (req,res) =>{
-    res.json({
-        msg:"Hello there how are you"
-    })
-} 
