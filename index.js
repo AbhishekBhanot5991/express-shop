@@ -1,15 +1,13 @@
 const express = require('express');
-const multer = require('multer');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-dotenv.config();
 
 // const PORT = 3000; // Removed unused variable
 
