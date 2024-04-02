@@ -40,4 +40,8 @@ app.listen(port, ()=>{
     console.log(`Server is running on the PORT : http://localhost:${port}`)
 })
 
-module.exports = app;
+module.exports = (req,res) =>{
+    res.json({
+        msg:"Hello there how are you"
+    })
+} 
