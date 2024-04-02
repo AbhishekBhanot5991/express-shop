@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
-app.use(morgan());
+app.use(morgan('combined'));
 
 mongoose.connect(process.env.DB_CONNECTION_STRING)
   .then(() => {
