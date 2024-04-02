@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const morgan =  require('morgan');
 const app = express();
+const port = process.env.PORT || 3000;
+dotenv.config()
 // const PORT = 3000;
 const authRoutes = require('./routes/authRoutes'); 
 const productRoutes = require('./routes/productRoutes');
@@ -23,8 +25,6 @@ app.use(morgan());
 app.get('/',(req,res)=>{
     res.send("Hello");
 })
-const port = process.env.PORT || 3000;
-dotenv.config()
 mongoose.connect(process.env.DB_CONNECTION_STRING).then(()=>{
     console.log('Connected to MongoDB')
 }).catch(err=>{
